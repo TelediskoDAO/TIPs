@@ -4,13 +4,13 @@ Teledisko Improvement Proposals (TIPs) describe standards for the Teledisko DAO,
 
 ## Current TIPs
 
-Short Name   | Title                                                         | Type          | Status     | Editor
--------------|---------------------------------------------------------------|---------------|------------|-------------------
-[TIP-0](0)   | TIP Purpose and Guidelines                                    | Meta          | TBD        | Alberto Granzotto
-[TIP-1](1)   | Teledisko DAO Wuschwelt                                       | Standard      | TBD        | Benjamin Uphues
-[TIP-2](2)   | Public Key Authentication Protocol for Odoo                   | Standard      | Raw        | Alberto Granzotto
-[TIP-3](3)   | API access to Odoo models                                     | Standard      | Raw        | Alberto Granzotto
-[TIP-4](4)   | Roadmap                                                       | Informational | Raw        | Alberto Granzotto
+| Short Name | Title                                       | Type          | Status | Editor            |
+| ---------- | ------------------------------------------- | ------------- | ------ | ----------------- |
+| [TIP-0](0) | TIP Purpose and Guidelines                  | Meta          | TBD    | Alberto Granzotto |
+| [TIP-1](1) | Teledisko DAO Articles of Association       | Standard      | Raw    | Marko             |
+| [TIP-2](2) | Public Key Authentication Protocol for Odoo | Standard      | Raw    | Alberto Granzotto |
+| [TIP-3](3) | API access to Odoo models                   | Standard      | Raw    | Alberto Granzotto |
+| [TIP-4](4) | Roadmap                                     | Informational | Raw    | Alberto Granzotto |
 
 ## TIP template
 
