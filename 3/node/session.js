@@ -48,7 +48,8 @@ async function session(url, db, username, password) {
   const model = call.bind(null, url, "object", "execute_kw", db, uid, password);
   return {
     c: async (name, object) => model(name, "create", [object]),
-    r: async (name, query) => model(name, "search_read", [tuplify(query)]),
+    r: async (name, query, fields) =>
+      model(name, "search_read", [tuplify(query)], fields),
     u: async (name, id, object) => model(name, "write", [[id], object]),
     uid,
   };
