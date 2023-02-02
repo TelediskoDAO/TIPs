@@ -1,5 +1,6 @@
-import jwt
+import base64
 import datetime
+import jwt
 import time
 import uuid
 from web3.auto import w3
@@ -20,9 +21,10 @@ def server_get_web3_auth():
     return signing_token
 
 
-def server_post_web3_auth(signing_token, signature):
-    print("[Server] Verify JWT token:", signing_token)
-    payload = jwt.decode(signing_token, SERVER_SECRET, algorithms=["HS256"])
+def server_post_web3_auth(encoded_authentication):
+    authentication = eval(base64.b64decode(encoded_authentication).decode())
+    print("[Server] Verify JWT token:", authentication['signing_token'])
+    payload = jwt.decode(authentication['signing_token'], server_secret, algorithms=["HS256"])
     print("[Server] JWT is valid. Extract signature")
     message = encode_defunct(text=payload["message"])
     signer = w3.eth.account.recover_message(message, signature=signature)
@@ -46,13 +48,15 @@ def client_run_authentication():
     print("[Client] Address:", wallet.address)
     print("[Client] Require signing_token")
     signing_token = server_get_web3_auth()
-    payload = jwt.decode(signing_token, verify=False)
+    payload = jwt.decode(signing_token, algorithms=["HS256"], options={"verify_signature": False})
     print("[Client] Create signature for:", payload["message"])
     message = encode_defunct(text=payload["message"])
     signed_message = w3.eth.account.sign_message(message, private_key=wallet.privateKey)
     print("[Client] Submit signature and require access_token")
-    access_token = server_post_web3_auth(signing_token, signed_message.signature)
+    encoded_authentication = {'signing_token': token, 'signature': signed_message.signature}
+    encoded_authentication = base64.urlsafe_b64encode(str(encoded_authentication).encode())
+    access_token = server_post_web3_auth(encoded_authentication)
     print("[Client] access_token:", access_token)
-
+    
 
 client_run_authentication()
